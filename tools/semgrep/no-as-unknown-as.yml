@@ -1,0 +1,11 @@
+rules:
+  - id: no-as-unknown-as
+    message: Avoid double casts through unknown. Prefer a validated mapper or a single narrow boundary cast.
+    severity: ERROR
+    languages: [typescript]
+    paths:
+      exclude:
+        - "**/lib/evlog.ts"
+        - "**/*.test.*"
+        - "**/*.spec.*"
+    pattern: $VALUE as unknown as $TYPE

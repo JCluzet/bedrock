@@ -1,0 +1,22 @@
+rules:
+  - id: no-external-image-assets
+    message: |
+      Do not reference external image/media URLs. Copy the asset into `public/`
+      and reference it with an absolute path (e.g. `/noise.webp`).
+      Remote CDNs become a single point of failure (DNS/CDN outage) and can
+      leak analytics from end users.
+    severity: ERROR
+    languages: [typescript]
+    paths:
+      exclude:
+        - "**/*.test.*"
+        - "**/*.spec.*"
+    patterns:
+      - pattern-either:
+          - pattern: <Image src=$URL ... />
+          - pattern: <img src=$URL ... />
+          - pattern: <video src=$URL ... />
+          - pattern: <source src=$URL ... />
+      - metavariable-regex:
+          metavariable: $URL
+          regex: ^["']https?://

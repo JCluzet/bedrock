@@ -1,0 +1,14 @@
+rules:
+  - id: no-fetch-in-use-effect
+    message: Do not fetch in useEffect. Prefer Server Components, TanStack Query, or explicit user-triggered mutations.
+    severity: ERROR
+    languages: [typescript]
+    paths:
+      exclude:
+        - "**/*.test.*"
+        - "**/*.spec.*"
+    patterns:
+      - pattern-inside: |
+          useEffect(..., ...)
+      # Any fetch() inside a useEffect, regardless of args or method.
+      - pattern: "fetch(...)"

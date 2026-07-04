@@ -1,0 +1,30 @@
+rules:
+  # Forbids magic-number `staleTime`/`gcTime` inside `useQuery({...})`. Cache
+  # windows must reference a named `STALE.*` profile (lib/query/stale-times.ts)
+  # so they stay consistent with the server's cacheLife profiles.
+  - id: no-magic-stale-time
+    message: >
+      Magic-number `staleTime`/`gcTime` in a useQuery. Reference a named
+      profile from `@/lib/query/stale-times` (e.g. `STALE.standard`) instead of
+      a raw number. See .agents/rules/state.md#staletime.
+    severity: ERROR
+    languages: [typescript]
+    paths:
+      include:
+        - "**/app/**"
+        - "**/features/**"
+        - "**/components/**"
+        - "**/lib/**"
+      exclude:
+        - "**/*.test.*"
+        - "**/*.spec.*"
+        - "**/lib/query/**"
+    patterns:
+      - pattern-inside: useQuery({...})
+      - pattern-either:
+          - pattern: "staleTime: $V"
+          - pattern: "gcTime: $V"
+      - pattern-not: "staleTime: STALE.$P"
+      - pattern-not: "gcTime: STALE.$P"
+      - pattern-not: "staleTime: STALE[$K]"
+      - pattern-not: "gcTime: STALE[$K]"

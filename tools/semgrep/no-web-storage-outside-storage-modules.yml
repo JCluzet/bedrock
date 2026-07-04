@@ -1,0 +1,16 @@
+rules:
+  - id: no-web-storage-outside-storage-modules
+    message: Keep browser storage access inside dedicated storage modules or hooks.
+    severity: ERROR
+    languages: [typescript]
+    paths:
+      exclude:
+        - "**/*.test.*"
+        - "**/*.spec.*"
+        - "**/hooks/**"
+        - "**/*storage.ts"
+    pattern-either:
+      - pattern: window.localStorage.$METHOD(...)
+      - pattern: localStorage.$METHOD(...)
+      - pattern: window.sessionStorage.$METHOD(...)
+      - pattern: sessionStorage.$METHOD(...)

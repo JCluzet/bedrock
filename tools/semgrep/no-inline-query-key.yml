@@ -1,0 +1,21 @@
+rules:
+  # Forbids inline `queryKey: [...]` array literals. Keys must come from a typed
+  # `*Keys` factory (e.g. `dashboardKeys.data(userId)`, `profileKeys.detail(id)`)
+  # so key shapes stay consistent and invalidation targets the right entries.
+  - id: no-inline-query-key
+    message: >
+      Inline `queryKey: [...]` array literal. Query keys must come from a typed
+      `*Keys` factory (e.g. `dashboardKeys.data(userId)`), never an inline
+      array. See .agents/rules/state.md#query-keys.
+    severity: ERROR
+    languages: [typescript]
+    paths:
+      include:
+        - "**/app/**"
+        - "**/features/**"
+        - "**/components/**"
+        - "**/lib/**"
+      exclude:
+        - "**/*.test.*"
+        - "**/*.spec.*"
+    pattern: "queryKey: [...]"

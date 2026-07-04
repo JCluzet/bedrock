@@ -1,0 +1,28 @@
+id: no-raw-jsx-primitives
+language: Tsx
+severity: error
+message: Use approved project primitives instead of raw JSX form and interactive elements.
+note: |
+  Prefer shared primitives from `components/ui` and Next.js built-ins instead of raw tags.
+  Rule: .agents/rules/ui-components.md
+files:
+  - app/**/*.tsx
+  - components/**/*.tsx
+  - features/**/*.tsx
+ignores:
+  - app/kitchen-sink/**/*.tsx
+  - components/ui/**/*.tsx
+  - "**/*.test.tsx"
+  - "**/*.spec.tsx"
+rule:
+  any:
+    - pattern: <button $$$ATTRS>$$$CHILDREN</button>
+    - pattern: <dialog $$$ATTRS>$$$CHILDREN</dialog>
+    - pattern: <form $$$ATTRS>$$$CHILDREN</form>
+    - pattern: <hr $$$ATTRS />
+    - pattern: <img $$$ATTRS />
+    - pattern: <input $$$ATTRS />
+    - pattern: <script $$$ATTRS>$$$CHILDREN</script>
+    - pattern: <select $$$ATTRS>$$$CHILDREN</select>
+    - pattern: <table $$$ATTRS>$$$CHILDREN</table>
+    - pattern: <textarea $$$ATTRS>$$$CHILDREN</textarea>

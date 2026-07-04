@@ -1,0 +1,22 @@
+{
+  "absolute": true,
+  "gitignore": true,
+  "ignore": [
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/__snapshots__/**",
+    ".next/**",
+    "components/ui/**",
+    "hooks/**",
+    "docs/**",
+    "public/**"
+  ],
+  "minLines": 8,
+  "minTokens": 120,
+  "mode": "strict",
+  "pattern": "**/*.{ts,tsx}",
+  "reporters": [
+    "console"
+  ],
+  "threshold": 0
+}

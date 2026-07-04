@@ -1,0 +1,21 @@
+rules:
+  - id: no-data-transform-in-presenter
+    message: >
+      Presenters must not transform data. Move .map()/.filter()/.reduce()
+      assignments to the orchestrator or a hook. Presenters receive
+      ready-to-render props only. See .agents/rules/components.md.
+    severity: ERROR
+    languages: [typescript, javascript]
+    paths:
+      include:
+        - "**/presenters/**"
+      exclude:
+        - "**/*.test.*"
+        - "**/*.spec.*"
+    pattern-either:
+      - pattern: const $X = $Y.map(...);
+      - pattern: const $X = $Y.filter(...);
+      - pattern: const $X = $Y.reduce(...);
+      - pattern: let $X = $Y.map(...);
+      - pattern: let $X = $Y.filter(...);
+      - pattern: let $X = $Y.reduce(...);
