@@ -281,7 +281,8 @@ function ChartLegendContent({
 }: React.ComponentProps<"div"> & {
   hideIcon?: boolean
   nameKey?: string
-} & RechartsPrimitive.DefaultLegendContentProps) {
+  verticalAlign?: "top" | "middle" | "bottom"
+} & Omit<RechartsPrimitive.DefaultLegendContentProps, "verticalAlign">) {
   const { config } = useChart()
 
   if (!payload?.length) {
